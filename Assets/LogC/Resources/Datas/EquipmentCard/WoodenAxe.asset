@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WoodenAxe
   m_EditorClassIdentifier: 
   equipmentName: WoodenAxe
-  equipmentStrength: 0
-  equipmentDurability: 0
+  equipmentStrength: 5
+  equipmentDurability: 1000
