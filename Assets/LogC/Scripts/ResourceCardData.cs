@@ -7,5 +7,5 @@ public class ResourceCardData : ScriptableObject
     public string resourceName;                 // 자원의 이름
     public float resourceStrength;              // 자원의 강도
     public int resourceCount;                   // 소지한 자원 개수
-    public EquipmentCardData countableToolType; // 캘 수 있는 도구 타입
+    public EquipmentCardData[] countableToolTypes; // 캘 수 있는 도구 타입
 }

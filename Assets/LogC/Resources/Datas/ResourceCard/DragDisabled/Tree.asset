@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8536ee40b6681d149b5b5c44cde9bbd8, type: 3}
-  m_Name: Wood
+  m_Name: Tree
   m_EditorClassIdentifier: 
-  resourceName: Wood
-  resourceStrength: 20
-  resourceCount: 10
-  countableToolTypes: []
+  resourceName: Tree
+  resourceStrength: 50
+  resourceCount: 5
+  countableToolTypes:
+  - {fileID: 11400000, guid: a0a4427bc09975143a9fa7ebe58beea1, type: 2}
