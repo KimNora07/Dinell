@@ -16,6 +16,12 @@ public class ResourceCard : MonoBehaviour, IDropHandler
     [SerializeField] private Image      strengthBar;
     [SerializeField] private TMP_Text   countText;
 
+    public delegate void OnResourceCardHandler();
+    public event OnResourceCardHandler OnDestroyResourceCard;
+    public event OnResourceCardHandler OnDecreaseResource;
+
+    private HorizontalCardHolder cardDeck;
+
     private void Awake()
     {
         this.resourceName = resourceCard.resourceName;
@@ -24,6 +30,11 @@ public class ResourceCard : MonoBehaviour, IDropHandler
         this.resourceCount = resourceCard.resourceCount;
         strengthBar.fillAmount = this.currentResourceStrength / this.maxResourceStrength;
         countText.text = this.resourceCount.ToString();
+
+        cardDeck = FindAnyObjectByType<HorizontalCardHolder>();
+
+        OnDestroyResourceCard += () => { };
+        OnDecreaseResource += () => { DecreaseCardEvent(); };
     }
 
     void IDropHandler.OnDrop(PointerEventData eventData)
@@ -32,7 +43,7 @@ public class ResourceCard : MonoBehaviour, IDropHandler
         EquipmentCard droppedEquipment = droppedObject.GetComponent<EquipmentCard>();
         CardController cardController = droppedObject.GetComponent<CardController>();
 
-        if(cardController == null || !cardController.isActiveAndEnabled)
+        if (cardController == null || !cardController.isActiveAndEnabled)
         {
             Debug.Log("드래그가 불가능한 오브젝트입니다!");
             return;
@@ -54,6 +65,7 @@ public class ResourceCard : MonoBehaviour, IDropHandler
                     resourceCount--;
                     countText.text = this.resourceCount.ToString();
                     // TODO: 자원 카드 지급
+                    OnDecreaseResource?.Invoke();
 
                     if (this.resourceCount == 0)
                     {
@@ -65,5 +77,19 @@ public class ResourceCard : MonoBehaviour, IDropHandler
                 break;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        OnDestroyResourceCard?.Invoke();
+    }
+
+    private void DecreaseCardEvent()
+    {
+        CardSlot emptySlot = cardDeck.EmptyCardSlot();
+        if (emptySlot == null) return;
+
+        GameObject dropCard = Instantiate(resourceCard.dropCard, emptySlot.transform);
+        emptySlot.childCard = dropCard;
     }
 }

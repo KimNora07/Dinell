@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,12 +18,21 @@ public class CraftingSystem : MonoBehaviour
         craftingSlots = this.gameObject.GetComponentsInChildren<CraftingSlot>();
     }
 
+    /// <summary>
+    /// 제작 메서드
+    /// </summary>
     public void Craft()
     {
         bool isValid = IsCombinationValid(craftingSlots, itemGrids);
         Debug.Log(isValid);
     }
 
+    /// <summary>
+    /// 조합식과 같은지 비교하는 메서드
+    /// </summary>
+    /// <param name="craftingSlots">조합대 슬롯</param>
+    /// <param name="itemGrids">조합식</param>
+    /// <returns></returns>
     public bool IsCombinationValid(CraftingSlot[] craftingSlots, ItemGrid[] itemGrids)
     {
         foreach (var recipe in itemGrids)
@@ -33,8 +41,8 @@ public class CraftingSystem : MonoBehaviour
             {
                 continue;
             }
-
             bool isValid = true;
+
             // 각 카드의 위치와 내용을 비교
             for (int i = 0; i < craftingSlots.Length; i++)
             {

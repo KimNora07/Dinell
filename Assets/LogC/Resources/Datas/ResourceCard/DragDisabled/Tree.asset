@@ -17,3 +17,5 @@ MonoBehaviour:
   resourceCount: 5
   countableToolTypes:
   - {fileID: 11400000, guid: a0a4427bc09975143a9fa7ebe58beea1, type: 2}
+  dropCard: {fileID: 7069117932055791956, guid: 33e1ae9ebf37851439546dd704b712f0, type: 3}
+  isDragEnabled: 0

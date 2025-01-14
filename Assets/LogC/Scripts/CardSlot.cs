@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class CardSlot : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public GameObject childCard;
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        if(this.transform.childCount > 0)
+        {
+            childCard = this.transform.GetChild(0).gameObject;
+        }
     }
 }

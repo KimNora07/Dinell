@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine.Rendering;
 
 public class Programmers : MonoBehaviour
 {
@@ -83,24 +84,22 @@ public class Programmers : MonoBehaviour
     //    return answer;
     //}
 
-    public class Solution
+    public string solution(string my_string, int s, int e)
     {
-        public string solution(string my_string, int n)
+        string answer = my_string;
+        answer.Remove(s, e - s + 1);
+
+        for (int i = e; i >= s; i--)
         {
-            string answer = "";
-
-            for(int i = my_string.Length - n; i < my_string.Length; i++)
-            {
-                answer += my_string[i];
-            }
-
-            return answer;
+            answer.Insert(s + (e - i), my_string[i].ToString());
         }
+
+        return answer;
     }
 
     private void Awake()
     {
-        //Debug.Log(solution("rermgorpsam", new int[,] { {2,3 },{0,7 },{5,9 },{6,10 } }));
+        Debug.Log(solution("Progra21Sremm3", 6, 12));
 
     }
 

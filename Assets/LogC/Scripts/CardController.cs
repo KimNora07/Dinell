@@ -9,6 +9,13 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private Transform defaultTransform;
     private RectTransform canvasTransform;
 
+    private HorizontalCardHolder cardDeck;
+
+    private void Awake()
+    {
+        cardDeck = FindAnyObjectByType<HorizontalCardHolder>();
+    }
+
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
         defaultPosition = this.transform.position;      // 잘못된 위치에 두었을 경우 되돌림
@@ -33,5 +40,6 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GetComponent<Image>().raycastTarget = true;
         this.transform.position = defaultPosition;
         transform.SetParent(defaultTransform);
+
     }
 }
